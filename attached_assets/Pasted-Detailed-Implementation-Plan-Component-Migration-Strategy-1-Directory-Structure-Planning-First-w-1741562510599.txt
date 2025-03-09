@@ -1,0 +1,186 @@
+Detailed Implementation Plan: Component Migration Strategy
+1. Directory Structure Planning
+
+First, we need to create a well-organized directory structure in client/src/quranic-corpus/ that mirrors the structure in quranic-corpus/src/. This will maintain consistency and make the migration process smoother.
+Directory Structure Analysis
+
+Let's plan out the directory structure:
+
+client/src/quranic-corpus/
+├── components/          # Reusable UI components
+│   ├── common/          # Shared components like buttons, inputs
+│   ├── layout/          # Layout components like header, footer
+│   └── specialized/     # Domain-specific components
+├── services/            # Business logic and data fetching
+│   ├── api/             # API communication services
+│   ├── domain/          # Domain-specific services
+│   └── utils/           # Utility services
+├── models/              # Data models and interfaces
+├── hooks/               # Custom React hooks
+├── contexts/            # React context providers
+├── di/                  # Dependency injection setup
+├── styles/              # Global styles and themes
+└── pages/               # Page components
+
+2. Component Identification and Categorization
+2.1 Core UI Components
+
+    Typography components (headers, paragraphs, Arabic text)
+    Navigation components (menus, breadcrumbs)
+    Layout components (grids, containers)
+    Footer component (already identified in 
+
+    )
+
+2.2 Specialized Components
+
+    Quran text display components
+    Word analysis components
+    Translation components
+    Grammar diagram components
+    Search components
+
+2.3 Feature Components
+
+    Home page components (identified in 
+
+    )
+    User interaction components
+    Dictionary components
+    Ontology visualization components
+
+3. Component Dependency Mapping
+
+We need to create a comprehensive dependency graph that shows relationships between components:
+3.1 Primary Dependencies
+
+    Base UI components → Layout components
+    Layout components → Page containers
+    Service interfaces → Service implementations
+    Domain models → Service implementations
+    Service implementations → Feature components
+
+3.2 Dependency Analysis Methodology
+
+    Start with existing imports in each component file
+    Document parent-child relationships
+    Identify shared services used by multiple components
+    Map context providers and consumers
+    Identify TSyringe injection tokens and dependencies
+
+4. Component Categorization Framework
+4.1 By Technical Role
+
+    Presentational Components: UI-only components with no business logic
+    Container Components: Components that connect to services/state
+    HOCs/Hooks: Reusable logic that can be shared between components
+    Service Consumers: Components that directly use injected services
+
+4.2 By Functional Domain
+
+    Navigation Components: Components related to site navigation
+    Quran Display Components: Components for displaying Quranic text
+    Analysis Components: Components for linguistic analysis
+    Search Components: Components for search functionality
+    User Interaction Components: Components for user input and feedback
+
+5. Migration Sequence Planning
+5.1 Base Layer (Minimal Dependencies)
+
+    Utility functions and helpers
+    Basic UI components (buttons, inputs, etc.)
+    Style definitions and theme constants
+    Service interfaces and models
+
+5.2 Middle Layer
+
+    Service implementations
+    Layout components
+    Context providers
+    Custom hooks
+
+5.3 Feature Layer
+
+    Container components
+    Feature-specific components
+    Page components
+    Top-level application component
+
+6. Detailed Component Analysis Methodology
+
+For each component, we need to document:
+6.1 Technical Details
+
+    Props interface
+    State management approach
+    External dependencies
+    Internal React hooks used
+    Event handlers
+    Rendering logic
+
+6.2 Migration Considerations
+
+    Required adaptations for new architecture
+    Style changes needed for Tailwind
+    Service injection modifications
+    Potential integration issues
+
+7. Dependency Injection Analysis
+7.1 TSyringe Setup
+
+    Identify all service registrations
+    Document injection tokens
+    Map singleton vs transient services
+    Plan container bootstrapping in new architecture
+
+7.2 DI Migration Strategy
+
+    Create equivalent registration module in new project
+    Maintain token consistency
+    Preserve service lifecycles
+    Adapt provider pattern if needed
+
+8. Implementation Tools and Processes
+8.1 Analysis Tools
+
+    Code inspection tools to identify component relationships
+    Dependency visualization tools
+    Component tree mappers
+
+8.2 Documentation Methods
+
+    Structured component documentation templates
+    Migration checklist for each component
+    Dependency graphs
+    Migration status tracking
+
+9. Practical Migration Steps
+9.1 Initial Setup
+
+    Create the directory structure in client/src/quranic-corpus/
+    Set up TSyringe and other required dependencies
+    Create base type definitions and interfaces
+
+9.2 Component Extraction Process
+
+    Start with most basic utility components
+    Extract and adapt each component according to the plan
+    Test each component in isolation
+    Gradually build up the component hierarchy
+
+10. Risk Assessment and Mitigation
+10.1 Potential Challenges
+
+    Components with tight coupling to original architecture
+    Circular dependencies in the original codebase
+    Incompatible styling approaches
+    Service interface mismatches
+
+10.2 Mitigation Strategies
+
+    Create adapter components/services where needed
+    Refactor circular dependencies during migration
+    Use CSS modules for components difficult to convert to Tailwind
+    Implement service facade pattern for complex service interactions
+
+This comprehensive plan provides a structured approach to analyzing and preparing for the migration of components from the Quranic Corpus project to the new architecture. By following this methodical process, we can ensure that components are migrated in the correct order, with proper attention to their dependencies and relationships, resulting in a clean integration with the new project structure.
